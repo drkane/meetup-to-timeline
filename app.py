@@ -24,7 +24,10 @@ def get_meetup_events(meetups, api_key, url="https://api.meetup.com/{}/events"):
     events = []
     for m in meetups:
         r = requests.get(url.format(m), params=params)
-        events += r.json()
+        if r.status_code == requests.codes.ok:
+            events += r.json()
+        else:
+            print("Could not find data for {}".format(m))
     return events
 
 
@@ -54,10 +57,10 @@ def events_to_timeline(events):
                 "minute": e["time"].minute,
             },
             "text": {
-                "headline": e["name"],
-                "text": e.get("description"),
+                "headline": e.get("name", ""),
+                "text": e.get("description", ""),
             },
-            "group": e.get("group", {}).get("name"),
+            "group": e.get("group", {}).get("name", ""),
             "unique_id": e["id"],
         })
     return timeline
