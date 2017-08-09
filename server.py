@@ -80,7 +80,7 @@ def main():
     parser.add_argument('--server', default="auto", help='Server backend to use (see http://bottlepy.org/docs/dev/deployment.html#switching-the-server-backend)')
 
     # meetup options
-    parser.add_argument('meetup_api_key', help="Meetup API key (see https://secure.meetup.com/meetup_api/key/)")
+    parser.add_argument('--meetup-api-key', help="Meetup API key (see https://secure.meetup.com/meetup_api/key/)")
     parser.add_argument('--meetup-api-url', default="https://api.meetup.com/{}/events", help="Meetup API URL for get events endpoint. Use a {} for where the meetup slug should go.")
 
     args = parser.parse_args()
