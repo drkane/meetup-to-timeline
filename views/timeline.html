@@ -7,8 +7,15 @@
   <body>
     <div id='timeline-embed' style="width: 100%; height: 600px"></div>
     <script type="text/javascript">
+      // from: https://timeline.knightlab.com/docs/instantiate-a-timeline.html
+
+      // https://timeline.knightlab.com/docs/options.html
+      var additionalOptions = {
+        start_at_end: true,
+      }
       timeline = new TL.Timeline('timeline-embed',
-        '/api/{{meetup}}');
+        '/api/{{meetup}}',
+        additionalOptions);
     </script>
   </body>
 </html>
