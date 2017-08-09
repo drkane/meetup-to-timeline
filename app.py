@@ -2,8 +2,15 @@ import bottle
 import requests
 import datetime
 import argparse
+import os
+
+DEFAULT_URL = "https://api.meetup.com/{}/events"
 
 app = bottle.Bottle()
+app.config["meetup_api_url"] = DEFAULT_URL
+
+if os.environ.get("MEETUP_API_KEY"):
+    app.config["meetup_api_key"] = os.environ.get("MEETUP_API_KEY")
 
 
 def get_meetup_events(meetups, api_key, url="https://api.meetup.com/{}/events"):
@@ -81,7 +88,7 @@ def main():
 
     # meetup options
     parser.add_argument('--meetup-api-key', help="Meetup API key (see https://secure.meetup.com/meetup_api/key/)")
-    parser.add_argument('--meetup-api-url', default="https://api.meetup.com/{}/events", help="Meetup API URL for get events endpoint. Use a {} for where the meetup slug should go.")
+    parser.add_argument('--meetup-api-url', default=DEFAULT_URL, help="Meetup API URL for get events endpoint. Use a {} for where the meetup slug should go.")
 
     args = parser.parse_args()
 
